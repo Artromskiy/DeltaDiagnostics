@@ -2,5 +2,6 @@
 
 - Migrate producer-specific diagnostic value types only when each owning
   project explicitly adopts this shared contract.
-- Add contract tests if coordinate or serialization behavior becomes shared
-  runtime behavior rather than a value-only API.
+- Keep the value-contract behavior covered by the bounded AOT smoke. Add a
+  standalone test project only if coordinate, timing or serialization behavior
+  becomes a separately shared runtime surface.

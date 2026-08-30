@@ -19,4 +19,10 @@ if (diagnostic.Location is not { } location || location.Source != source || loca
     return 1;
 }
 
+ProfileDuration duration = ProfileDuration.FromStopwatchTicks(1, 1);
+if (duration.Picoseconds != 1_000_000_000_000 || duration.ToTimeSpan() != TimeSpan.FromSeconds(1))
+{
+    return 1;
+}
+
 return source.IsValid && !SourceId.Empty.IsValid ? 0 : 1;
