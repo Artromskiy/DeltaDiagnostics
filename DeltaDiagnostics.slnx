@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="src/Delta.Diagnostics.Contract/Delta.Diagnostics.Contract.csproj" />
+  <Project Path="probes/DeltaDiagnostics.AotSmoke/DeltaDiagnostics.AotSmoke.csproj" />
 </Solution>

@@ -6,5 +6,6 @@
     <AssemblyName>Delta.Diagnostics.Contract</AssemblyName>
     <RootNamespace>Delta.Diagnostics</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
 </Project>
