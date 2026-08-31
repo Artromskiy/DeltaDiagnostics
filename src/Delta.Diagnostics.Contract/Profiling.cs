@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Delta.Diagnostics;
 
 /// <summary>
@@ -11,6 +13,14 @@ namespace Delta.Diagnostics;
 /// </remarks>
 public readonly struct ProfileDuration : IComparable<ProfileDuration>, IEquatable<ProfileDuration>
 {
+    private const decimal PicosecondsPerNanosecond = 1_000m;
+    private const decimal PicosecondsPerMicrosecond = 1_000_000m;
+    private const decimal PicosecondsPerMillisecond = 1_000_000_000m;
+    private const decimal PicosecondsPerSecond = 1_000_000_000_000m;
+    private const decimal PicosecondsPerMinute = 60_000_000_000_000m;
+    private const decimal PicosecondsPerHour = 3_600_000_000_000_000m;
+    private const decimal PicosecondsPerDay = 86_400_000_000_000_000m;
+
     /// <summary>Creates a duration from exact non-negative picoseconds.</summary>
     /// <param name="picoseconds">The exact non-negative duration in picoseconds.</param>
     public ProfileDuration(ulong picoseconds)
@@ -86,8 +96,41 @@ public readonly struct ProfileDuration : IComparable<ProfileDuration>, IEquatabl
     /// <summary>Returns a hash code based on the exact picosecond value.</summary>
     public override int GetHashCode() => Picoseconds.GetHashCode();
 
-    /// <summary>Returns a readable nanosecond and picosecond representation.</summary>
-    public override string ToString() => $"{Nanoseconds:G6} ns ({Picoseconds} ps)";
+    /// <summary>Returns an invariant human-readable duration without leading padding.</summary>
+    /// <remarks>
+    /// The result always contains three significant digits, an automatically
+    /// selected unit (<c>ps</c>, <c>ns</c>, <c>µs</c>, <c>ms</c>, <c>s</c>,
+    /// <c>min</c>, <c>h</c> or <c>d</c>) directly after the number. Three-digit
+    /// integral values use a trailing decimal point to preserve the decimal
+    /// column. The exact value remains available through <see cref="Picoseconds"/>.
+    /// </remarks>
+    public override string ToString()
+    {
+        var picoseconds = (decimal)Picoseconds;
+        return picoseconds switch
+        {
+            >= PicosecondsPerDay => Format(picoseconds / PicosecondsPerDay, "d"),
+            >= PicosecondsPerHour => Format(picoseconds / PicosecondsPerHour, "h"),
+            >= PicosecondsPerMinute => Format(picoseconds / PicosecondsPerMinute, "min"),
+            >= 999_500_000_000m => Format(picoseconds / PicosecondsPerSecond, "s"),
+            >= 999_500_000m => Format(picoseconds / PicosecondsPerMillisecond, "ms"),
+            >= 999_500m => Format(picoseconds / PicosecondsPerMicrosecond, "µs"),
+            >= PicosecondsPerNanosecond => Format(picoseconds / PicosecondsPerNanosecond, "ns"),
+            _ => Format(picoseconds, "ps")
+        };
+    }
+
+    private static string Format(decimal value, string unit)
+    {
+        var format = value >= 100m ? "F0" : value >= 10m ? "F1" : "F2";
+        var number = value.ToString(format, CultureInfo.InvariantCulture);
+        if (number.Length == 3 && number.IndexOf('.') < 0)
+        {
+            number += ".";
+        }
+
+        return $"{number}{unit}";
+    }
 
     /// <summary>Adds two durations, throwing if the result overflows picosecond storage.</summary>
     public static ProfileDuration operator +(ProfileDuration left, ProfileDuration right)

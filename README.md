@@ -24,6 +24,11 @@ interfaces remain in DeltaRender and consume this shared value. The former
 `Delta.Render.ProfileDuration` location is not retained as a compatibility
 alias; consumers should import `Delta.Diagnostics`.
 
+`ProfileDuration.ToString()` is intended for compact diagnostic/profiling text:
+it uses invariant culture, three significant digits, automatic unit selection
+from `ps` through `d`, directly followed by the unit with no padding or
+separator. Use `Picoseconds` when an exact machine-readable value is required.
+
 Compiler, loader, text and editor/tooling projects own diagnostic production,
 validation and presentation. This repository does not own exceptions, result
 aggregation, logging, formatting, mutable storage or project-specific codes.

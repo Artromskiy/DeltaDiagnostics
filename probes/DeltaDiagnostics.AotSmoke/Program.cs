@@ -25,4 +25,14 @@ if (duration.Picoseconds != 1_000_000_000_000 || duration.ToTimeSpan() != TimeSp
     return 1;
 }
 
+if (ProfileDuration.Zero.ToString() != "0.00ps"
+    || new ProfileDuration(1_000).ToString() != "1.00ns"
+    || new ProfileDuration(999_500).ToString() != "1.00µs"
+    || new ProfileDuration(1_234_567_000).ToString() != "1.23ms"
+    || new ProfileDuration(123_000_000_000).ToString() != "123.ms"
+    || new ProfileDuration(ulong.MaxValue).ToString() != "214.d")
+{
+    return 1;
+}
+
 return source.IsValid && !SourceId.Empty.IsValid ? 0 : 1;
