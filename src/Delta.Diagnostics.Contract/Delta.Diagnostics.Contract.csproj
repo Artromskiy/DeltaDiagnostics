@@ -4,8 +4,24 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>Delta.Diagnostics.Contract</AssemblyName>
+    <PackageId>Delta.Diagnostics.Contract</PackageId>
+    <Version>0.0.3</Version>
+    <Authors>Artromskiy</Authors>
+    <Description>Implementation-neutral diagnostics and profiling value contracts for .NET.</Description>
+    <PackageTags>diagnostics;profiling;contracts;aot</PackageTags>
+    <RepositoryUrl>https://github.com/Artromskiy/DeltaDiagnostics</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RootNamespace>Delta.Diagnostics</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <IsAotCompatible>true</IsAotCompatible>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildProjectDirectory)/../../README.md"
+          Pack="true"
+          PackagePath="README.md"
+          Visible="false" />
+  </ItemGroup>
 </Project>
