@@ -57,9 +57,11 @@ direct consumers change.
 
 ## NuGet package release
 
-`Delta.Diagnostics.Contract` is published as version `0.0.3` and corresponds
-to tag `v0.0.3`. Pack the contract for both target frameworks into a disposable
-directory, then inspect the nuspec and library assets:
+The `Delta.Diagnostics.Contract` release package is version `0.0.3` and
+corresponds to tag `v0.0.3`; NuGet.org publication must still be completed
+before external consumers can restore it. Pack the contract for both target
+frameworks into a disposable directory, then inspect the nuspec and library
+assets:
 
 ```bash
 package_dir="$(mktemp -d "${TMPDIR:-/tmp}/delta-diagnostics-pack.XXXXXX")"
