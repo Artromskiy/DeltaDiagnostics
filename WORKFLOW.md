@@ -54,3 +54,29 @@ probe writes its temporary native output outside the repository.
 The contract has no test project or external package dependencies. Keep public
 API changes deliberate and update the root contract registry when ownership or
 direct consumers change.
+
+## NuGet package release
+
+`Delta.Diagnostics.Contract` is published as version `0.0.3` and corresponds
+to tag `v0.0.3`. Pack the contract for both target frameworks into a disposable
+directory, then inspect the nuspec and library assets:
+
+```bash
+package_dir="$(mktemp -d "${TMPDIR:-/tmp}/delta-diagnostics-pack.XXXXXX")"
+dotnet restore DeltaDiagnostics.slnx -p:NuGetAudit=false
+dotnet pack src/DeltaDiagnostics.Contract/Delta.Diagnostics.Contract.csproj \
+  -c Release --no-restore -o "$package_dir"
+```
+
+Publish only the exact version to NuGet.org. Supply the key through a local
+credential provider or an already-exported environment variable; never commit
+or place it in shell history:
+
+```bash
+: "${NUGET_API_KEY:?Set NUGET_API_KEY through your local credential setup}"
+dotnet nuget push "$package_dir/Delta.Diagnostics.Contract.0.0.3.nupkg" \
+  --source https://api.nuget.org/v3/index.json \
+  --api-key "$NUGET_API_KEY" \
+  --skip-duplicate \
+  --no-symbols
+```
