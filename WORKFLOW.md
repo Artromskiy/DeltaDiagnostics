@@ -29,6 +29,21 @@ samples/ contains runnable examples; probes/ contains bounded
 headless/compiler/contract checks. Empty mandatory domains stay tracked with
 .gitkeep.
 
+## Shared pre-commit gates
+
+The formatter and code-metrics analyzer are maintained once in the Furnace root.
+Run them against this repository before every commit; see the [common
+workflow](../REVIEW_PLAYBOOK.md#shared-local-formatter-and-metrics-wrappers):
+
+```bash
+../eng/format.sh "$PWD"
+FORMAT_CHECK=1 ../eng/format.sh "$PWD"
+../eng/code-metrics.sh "$PWD" -v:q
+```
+
+Use `CODE_METRICS_ERROR_LOG=/tmp/delta-diagnostics-metrics.sarif` when an
+explicit metrics output path is needed.
+
 Run the bounded checks from this repository root:
 
 ```bash
