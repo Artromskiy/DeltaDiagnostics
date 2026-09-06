@@ -14,7 +14,7 @@ Furnace applications and tools. The public assembly is
 ## Quick start
 
 ```xml
-<PackageReference Include="Delta.Diagnostics.Contract" Version="0.0.3" />
+<PackageReference Include="Delta.Diagnostics.Contract" Version="*" />
 ```
 
 ```csharp
