@@ -1,14 +1,24 @@
-# DeltaDiagnostics agent guide
+# DeltaDiagnostics agent router
 
-Scope: the shared, implementation-neutral diagnostic and timing value contract
-used by Delta compiler, loader, render, text and tooling layers.
+Scope: dependency-free diagnostic and timing value contracts used by compiler,
+loader, render, text and tooling layers. Keep this project implementation
+neutral: programmer contract violations are exceptions, expected absence uses
+a Try pattern, and source/user failures use Delta.Diagnostics.Diagnostic.
 
-- `README.md` — stable ownership and API boundary.
-- `WORKFLOW.md` — bounded restore/build and repository checks.
-- `TODO.md` — deliberately small follow-up list.
+## Map — open only as needed
 
-Keep this repository dependency-free. Programmer contract violations remain
-exceptions, expected absence uses a `Try` pattern, and user/source failures
-use `Delta.Diagnostics.Diagnostic`. `ProfileDuration` is value-only; it does
-not imply a profiler, diagnostic bag, formatter, logger, universal result type
-or project-specific error enums here.
+- ../CODE_STYLE.md — technical data-flow, ownership, allocation and API rules.
+- ../CONTRACTS.md — cross-project ownership; open only for a boundary task.
+- WORKFLOW.md — project checks and command routing.
+- README.md — root human-facing GitHub/NuGet documentation; open only for a
+  documentation or public quick-start task.
+- src/DeltaDiagnostics.Contract — production contract source and public types.
+- tests, probes, samples — verification and runnable leaves; benchmarks contains
+  measured workloads.
+
+There is no project-specific IDEAS.md; research/options require an explicit
+request. TODO.md is not part of the default agent route and is opened only
+when the user names it.
+
+ProfileDuration is value-only: it is not a profiler, diagnostic bag, formatter,
+logger, universal result type or project-specific error enum.
