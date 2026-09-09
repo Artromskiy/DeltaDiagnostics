@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>Delta.Diagnostics.Contract</AssemblyName>
     <PackageId>Delta.Diagnostics.Contract</PackageId>
-    <Version>0.0.3</Version>
+    <Version>0.0.4</Version>
     <Authors>Artromskiy</Authors>
     <Description>Implementation-neutral diagnostics and profiling value contracts for .NET.</Description>
     <PackageTags>diagnostics;profiling;contracts;aot</PackageTags>
