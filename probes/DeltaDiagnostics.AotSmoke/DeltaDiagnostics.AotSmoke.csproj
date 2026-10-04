@@ -12,6 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/DeltaDiagnostics.Contract/Delta.Diagnostics.Contract.csproj" />
+    <ProjectReference Include="../../src/DeltaDiagnostics/Delta.Diagnostics.csproj" />
   </ItemGroup>
 </Project>

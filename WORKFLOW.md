@@ -66,7 +66,7 @@ or project metadata:
 Set `AOT_SMOKE_RID` to publish for another installed runtime identifier. The
 probe writes its temporary native output outside the repository.
 
-The contract has no test project or external package dependencies. Keep public
+The package has no test project or external package dependencies. Keep public
 API changes deliberate and update the root contract registry when ownership or
 direct consumers change.
 

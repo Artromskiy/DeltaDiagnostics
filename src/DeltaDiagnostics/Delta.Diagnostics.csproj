@@ -3,12 +3,12 @@
     <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>Delta.Diagnostics.Contract</AssemblyName>
-    <PackageId>Delta.Diagnostics.Contract</PackageId>
-    <Version>0.0.4</Version>
+    <AssemblyName>Delta.Diagnostics</AssemblyName>
+    <PackageId>Delta.Diagnostics</PackageId>
+    <Version>0.0.6</Version>
     <Authors>Artromskiy</Authors>
-    <Description>Implementation-neutral diagnostics and profiling value contracts for .NET.</Description>
-    <PackageTags>diagnostics;profiling;contracts;aot</PackageTags>
+    <Description>Implementation-neutral diagnostics, logging, and profiling APIs for .NET.</Description>
+    <PackageTags>diagnostics;logging;profiling;aot</PackageTags>
     <RepositoryUrl>https://github.com/Artromskiy/DeltaDiagnostics</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageReadmeFile>README.md</PackageReadmeFile>

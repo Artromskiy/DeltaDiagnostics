@@ -1,5 +1,23 @@
 using Delta.Diagnostics;
 
+Logger.Instance.Info("No-op logger smoke");
+Logger.Instance.Error(new InvalidOperationException("No-op logger smoke"));
+
+var logger = new SmokeLogger();
+Logger.Instance = logger;
+Logger.Instance.Info("Configured logger smoke");
+if (!ReferenceEquals(Logger.Instance, logger) || logger.InfoCount != 1)
+{
+    return 1;
+}
+
+// Intentional null assignment verifies that the setter restores the no-op sink.
+Logger.Instance = null!;
+if (ReferenceEquals(Logger.Instance, logger))
+{
+    return 1;
+}
+
 SourceId source = new(Guid.Parse("7f6f3b67-1d5a-4f15-aec3-8e3df18d3f6b"));
 SourcePosition start = new(2, 4, 18);
 SourcePosition end = new(2, 11, 25);
@@ -36,3 +54,18 @@ if (ProfileDuration.Zero.ToString() != "0.00ps"
 }
 
 return source.IsValid && !SourceId.Empty.IsValid ? 0 : 1;
+
+sealed class SmokeLogger : ILogger
+{
+    public int InfoCount { get; private set; }
+
+    public void Info(string message, string? method = null, object? context = null) => InfoCount++;
+
+    public void Warn(string message, string? method = null, object? context = null) { }
+
+    public void Assert(bool condition, string? method = null, object? context = null) { }
+
+    public void Error(Exception exception, string? method = null, object? context = null) { }
+
+    public void Throw(Exception exception, string? method = null, object? context = null) { }
+}
