@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net8.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>Delta.Diagnostics</AssemblyName>
     <PackageId>Delta.Diagnostics</PackageId>
-    <Version>0.0.6</Version>
+    <Version>0.0.7</Version>
     <Authors>Artromskiy</Authors>
     <Description>Implementation-neutral diagnostics, logging, and profiling APIs for .NET.</Description>
     <PackageTags>diagnostics;logging;profiling;aot</PackageTags>

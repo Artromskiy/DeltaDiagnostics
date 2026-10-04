@@ -11,7 +11,7 @@ for Furnace applications and tools. The public assembly is
 - `ILogger` and a replaceable `Logger.Instance` with a no-op default sink.
 - `Debug` and `Trace` facades whose calls are controlled by the corresponding
   compilation symbols.
-- `ProfileDuration` for exact elapsed-time values and comparisons.
+- `ProfileDuration` for elapsed-time values stored as whole nanoseconds and comparisons.
 - Invariant compact duration formatting with automatic units.
 
 ## Quick start
@@ -30,8 +30,9 @@ Console.WriteLine(duration); // 12.ms
 ## Core concepts
 
 Source positions use zero-based UTF-16 line, column and offset values. Ranges
-are half-open. `ProfileDuration` stores non-negative picoseconds; callers own
-clock sampling, aggregation and publication.
+are half-open. `ProfileDuration` stores non-negative whole nanoseconds; values
+from stopwatch ticks round to the nearest nanosecond. Callers own clock
+sampling, aggregation and publication.
 
 ## Capabilities and limits
 
