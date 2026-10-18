@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>Delta.Diagnostics</AssemblyName>
     <PackageId>Delta.Diagnostics</PackageId>
-    <Version>0.0.7</Version>
+    <Version>0.0.8</Version>
     <Authors>Artromskiy</Authors>
     <Description>Implementation-neutral diagnostics, logging, and profiling APIs for .NET.</Description>
     <PackageTags>diagnostics;logging;profiling;aot</PackageTags>

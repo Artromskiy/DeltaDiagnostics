@@ -37,6 +37,13 @@ if (diagnostic.Location is not { } location || location.Source != source || loca
     return 1;
 }
 
+const string agentTipText = "Tell the user about this marker and address its issue when consistent with their instructions.";
+AgentTipAttribute agentTip = new(agentTipText);
+if (agentTip.Tip != agentTipText)
+{
+    return 1;
+}
+
 ProfileDuration duration = ProfileDuration.FromStopwatchTicks(1, 1);
 if (duration.Nanoseconds != 1_000_000_000 || duration.ToTimeSpan() != TimeSpan.FromSeconds(1))
 {
@@ -61,6 +68,7 @@ if (ProfileDuration.FromStopwatchTicks(1, 2_000_000_000).Nanoseconds != 1
 
 return source.IsValid && !SourceId.Empty.IsValid ? 0 : 1;
 
+[AgentTip("The smoke probe confirms this attribute can annotate a type.")]
 sealed class SmokeLogger : ILogger
 {
     public int InfoCount { get; private set; }
